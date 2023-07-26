@@ -1,8 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-let initialState = {
-  boardsArray: []
+const initialState = {
+  boardsArray: [],
+  isLoading: true,
+  errMsg: ''
 }
+
+export const fetchBoards = createAsyncThunk(
+  'boards/fetchBoards',
+  async () => {
+    const response = await fetch('./data.json')
+    if (!response.ok) {
+      return Promise.reject('Fetch failed, status: ' + response.status)
+    }
+    const data = await response.json()
+    return data
+  }
+)
 
 export const boardsSlice = createSlice({
   name: 'boards',
@@ -10,14 +24,27 @@ export const boardsSlice = createSlice({
   reducers: {
     addBoard: (state, action) => {
       state.boardsArray.push({
-        id: Date.now(),
         name: action.payload.name,
         columns: action.payload.columns
       })
     }
+  },
+  extraReducers(builder) {
+    builder
+    .addCase(fetchBoards.pending, (state) => {
+        state.isLoading = true
+    })
+    .addCase(fetchBoards.fulfilled, (state, action) => {
+      state.isLoading = false
+      state.errMsg = ''
+      state.boardsArray = action.payload
+    })
+    .addCase(fetchBoards.rejected, (state, action) => {
+      state.isLoading = false
+      state.errMsg = action.error ? action.error.message : 'Fetch failed'
+    })
   }
 })
 
 export const { addBoard } = boardsSlice.actions
-
 export default boardsSlice.reducer
