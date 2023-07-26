@@ -1,0 +1,45 @@
+.header {
+  grid-area: header;
+  background-color: #2B2C37;
+  display: flex;
+}
+
+.header__logo {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+.header__info {
+  border-left: 1px solid var(--primary-border);
+  flex: 1;
+  height: 97px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 2rem;
+}
+
+.header h1 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.button-ellipsis-group {
+  display: flex;
+  align-items: center;
+}
+
+.add-task-btn {
+  background-color: var(--primary-purple);
+}
+
+.add-task-btn:hover {
+  background-color: var(--primary-purple-hover);
+}
+
+.header__ellipsis {
+  padding: 1rem;
+  cursor: pointer;
+}

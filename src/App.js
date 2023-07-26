@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchBoards } from './features/boards/boardsSlice';
+import Layout from './components/Layout';
 import './App.css';
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
   }, [dispatch])
  
   return (
-    <>Hi</>
+    <Layout /> 
   );
 }
 
