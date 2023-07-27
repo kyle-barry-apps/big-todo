@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { BoardsProvider } from './contexts/BoardsContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { fetchBoards } from './features/boards/boardsSlice';
 import Layout from './components/Layout';
 import './App.css';
@@ -9,17 +10,16 @@ function App() {
 
   const dispatch = useDispatch()
 
-  const boards = useSelector(state => state.boards.boardsArray)
-  console.log(boards)
-
   useEffect(() => {
     dispatch(fetchBoards())
   }, [dispatch])
  
   return (
-    <BoardsProvider>
-      <Layout /> 
-    </BoardsProvider>
+    <ThemeProvider>
+      <BoardsProvider>
+        <Layout /> 
+      </BoardsProvider>
+    </ThemeProvider>
   );
 }
 

@@ -1,31 +1,66 @@
 import { useSelector } from 'react-redux'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { BoardsContext } from '../../contexts/BoardsContext'
+import { ThemeContext } from '../../contexts/ThemeContext'
 import './navigation.css'
 
-const Navigation = () => {
+const Navigation = ( { showNav, setShowNav }) => {
 
   const { activeBoard, setActiveBoard } = useContext(BoardsContext)
-
+  const { theme, setTheme } = useContext(ThemeContext)
   const boards = useSelector(state => state.boards.boardsArray)
 
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (boards.length > 0 && !activeBoard) {
+      setActiveBoard(boards[0]);
+    }
+  }, [boards, activeBoard, setActiveBoard]);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
+
   return (
-    <nav className="nav">
+    <nav className={showNav ? 'nav' : 'nav hidden'}>
+      <div>
       <span className='nav__boards-number'>All Boards ( {boards.length} )</span>
-      <ul>
-        {boards.map((b, index) => {
-          return (
-            <div onClick={() => setActiveBoard(b.name)} key={index} className={activeBoard === b.name ? 'nav__board-name active' : 'nav__board-name'}>
-              <img className='nav__board-icon' src="./assets/icon-board.svg" alt="board icon" />
-              <li>{b.name}</li>
-            </div>
-          )
-        })}
-        <div className='nav__board-name'>
-          <img className='nav__board-icon' src="./assets/icon-board.svg" alt="board icon" />
-          <li className='nav__create-new-board'>+ Create a New Board</li>
+        {boards &&
+        <ul>
+          {boards.map((b, index) => {
+            return (
+              <div onClick={() => setActiveBoard(b)} key={index} className={activeBoard && activeBoard.name === b.name ? 'nav__board-name active' : 'nav__board-name'}>
+                <img className='nav__board-icon' src="./assets/icon-board.svg" alt="board icon" />
+                <li>{b.name}</li>
+              </div>
+            )
+          })}
+          <div className='nav__board-name'>
+            <img className='nav__board-icon' src="./assets/icon-board.svg" alt="board icon" />
+            <li className='nav__create-new-board'>+ Create a New Board</li>
+          </div>
+        </ul>
+        }
+      </div>
+      <div className='nav__mode-sidebar'>
+        <div className="nav__mode-toggle">
+          <img src="./assets/icon-light-theme.svg" alt="light mode logo" />
+          <div onClick={toggleTheme} className="toggler">
+            <label className="switch">
+              <input type="checkbox" />
+              <span className="slider"></span>
+            </label>
+          </div>
+          <img src="./assets/icon-dark-theme.svg" alt="dark mode logo" />
         </div>
-      </ul>
+        <div onClick={() => setShowNav(!showNav)} className="nav__hide-sidebar">
+          <img src="./assets/icon-hide-sidebar.svg" alt="hide sidebar icon" />
+          <span>Hide Sidebar</span>
+        </div>
+      </div>
     </nav>
   )
 }
