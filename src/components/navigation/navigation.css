@@ -2,3 +2,42 @@
   grid-area: nav;
   background-color: #2B2C37;
 }
+
+.nav__boards-number {
+  text-transform: uppercase;
+  padding-left: 2rem;  
+  color: var(--primary-text);
+  letter-spacing: 1px;
+  font-size: .8rem;
+  padding-top: 2rem;
+}
+
+.nav ul {
+  list-style: none;
+  margin-top: 2rem;
+}
+
+.nav__board-name {
+  display: flex;
+  align-items: center;
+  color: var(--primary-text);
+  gap: 1rem;
+  padding: .8rem 2rem;
+  margin-right: 1rem;
+  border-radius: 0rem 24px 24px 0rem;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.nav__board-name.active {
+  background-color: var(--primary-purple);
+  color: white;
+}
+
+.nav__board-icon.active {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(27deg) brightness(107%) contrast(101%);
+}
+
+.nav__create-new-board {
+  color: var(--primary-purple);
+}

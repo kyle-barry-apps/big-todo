@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+import { BoardsProvider } from './contexts/BoardsContext';
 import { fetchBoards } from './features/boards/boardsSlice';
 import Layout from './components/Layout';
 import './App.css';
@@ -16,7 +17,9 @@ function App() {
   }, [dispatch])
  
   return (
-    <Layout /> 
+    <BoardsProvider>
+      <Layout /> 
+    </BoardsProvider>
   );
 }
 
