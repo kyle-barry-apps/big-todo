@@ -20,12 +20,19 @@ const Navigation = ( { showNav, setShowNav }) => {
     }
   }, [boards, activeBoard, setActiveBoard]);
 
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+
+  const checkMode = (e) => {
+    if (e.target.checked) {
+      setTheme('light')
+    } else {
+      setTheme('dark')
+    }
   }
 
+
+
   return (
-    <nav className={showNav ? 'nav' : 'nav hidden'}>
+    <nav className={showNav ? 'nav' : 'nav hidden'}> 
       <div>
       <span className='nav__boards-number'>All Boards ( {boards.length} )</span>
         {boards &&
@@ -48,9 +55,9 @@ const Navigation = ( { showNav, setShowNav }) => {
       <div className='nav__mode-sidebar'>
         <div className="nav__mode-toggle">
           <img src="./assets/icon-light-theme.svg" alt="light mode logo" />
-          <div onClick={toggleTheme} className="toggler">
+          <div className="toggler">
             <label className="switch">
-              <input type="checkbox" />
+              <input onChange={checkMode} type="checkbox" checked={theme === 'light' ? true : false} />
               <span className="slider"></span>
             </label>
           </div>

@@ -1,8 +1,7 @@
 .todo-section {
   grid-area: main;
   background-color: #20212C;
-  border: 1px solid var(--primary-border);
+  /* border: 1px solid var(--primary-border); */
   border-bottom: none;
   border-right: none;
-
 }

@@ -12,7 +12,8 @@
 }
 
 .header__info {
-  border-left: 1px solid var(--primary-border);
+  /* border-left: 1px solid var(--primary-border);
+  border-bottom: 1px solid var(--primary-border); */
   flex: 1;
   height: 97px;
   display: flex;

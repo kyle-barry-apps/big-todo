@@ -10,6 +10,9 @@ const Layout = () => {
 
   return (
     <div className={showNav ? 'layout' : 'layout hidden-nav'}>
+       <div onClick={()=> setShowNav(true)} className={showNav ? 'nav__show-sidebar' : 'nav__show-sidebar active'}>
+        <img src="./assets/icon-show-sidebar.svg" alt="show sidebar icon" />
+      </div>
       <Navigation showNav={showNav} setShowNav={setShowNav}/>
       <Header />
       <TodoSection />
