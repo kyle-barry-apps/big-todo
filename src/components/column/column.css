@@ -1,0 +1,11 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  min-width: 15rem;
+}
+
+.column__name {
+  color: var(--primary-text);
+  text-transform: uppercase;
+  font-size: .8rem;
+}

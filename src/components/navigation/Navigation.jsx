@@ -29,8 +29,6 @@ const Navigation = ( { showNav, setShowNav }) => {
     }
   }
 
-
-
   return (
     <nav className={showNav ? 'nav' : 'nav hidden'}> 
       <div>

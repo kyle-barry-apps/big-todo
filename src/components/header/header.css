@@ -43,4 +43,38 @@
 .header__ellipsis {
   padding: 1rem;
   cursor: pointer;
+  position: relative;
+}
+
+.header__board-options {
+  display: none;
+  flex-direction: column;
+  background-color: var(--primary-very-dark);
+  position: absolute;
+  right: 1rem;
+  top: 5.5rem;
+  padding: 1rem 1rem;
+  border-radius: 23px;
+  gap: .5rem;
+  width: 15rem;
+}
+
+.header__board-options.active {
+  display: flex;
+}
+
+.header__board-options div {
+  padding: .5rem;
+  width: 100%;
+  cursor: pointer;
+  font-size: .8rem;
+  user-select: none;
+}
+
+.header__edit {
+  color: var(--primary-text); 
+}
+
+.header__delete {
+  color: var(--warning-text);
 }
