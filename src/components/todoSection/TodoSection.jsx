@@ -10,12 +10,14 @@ const TodoSection = () => {
 
   return (
     <main className='todo-section'>
-      {activeBoard.columns.map((column, index) => {
+      {activeBoard && activeBoard.columns.map((column, index) => {
         return (
           <Column key={index} column={column}/>
         )
       })}
-      
+      <div className="todo-section__add-new-column">
+        <div>+ New Column</div>
+      </div>
     </main>
   )
 }
