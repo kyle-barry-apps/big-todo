@@ -25,3 +25,7 @@
   font-size: 1.2rem;
   cursor: pointer;
 }
+
+.todo-section__add-new-column:hover {
+  opacity: .8;
+}

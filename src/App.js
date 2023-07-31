@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { BoardsProvider } from './contexts/BoardsContext';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { ModalProvider } from './contexts/ModalContext';
 import { fetchBoards } from './features/boards/boardsSlice';
 import Layout from './components/Layout';
 import './App.css';
@@ -15,11 +16,13 @@ function App() {
   }, [dispatch])
  
   return (
-    <ThemeProvider>
-      <BoardsProvider>
-        <Layout /> 
-      </BoardsProvider>
-    </ThemeProvider>
+    <ModalProvider> 
+      <ThemeProvider>
+        <BoardsProvider>
+          <Layout /> 
+        </BoardsProvider>
+      </ThemeProvider>
+    </ModalProvider>
   );
 }
 

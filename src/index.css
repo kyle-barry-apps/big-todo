@@ -28,5 +28,6 @@ body {
   border-radius: 24px;
   color: white;
   cursor: pointer;
-  transition: .15s
+  transition: .15s;
+  align-items: center;
 }

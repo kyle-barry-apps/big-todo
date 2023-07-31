@@ -2,13 +2,17 @@ import { useSelector } from 'react-redux'
 import { useContext, useEffect } from 'react'
 import { BoardsContext } from '../../contexts/BoardsContext'
 import { ThemeContext } from '../../contexts/ThemeContext'
+import { ModalContext } from '../../contexts/ModalContext'
 import './navigation.css'
 
 const Navigation = ( { showNav, setShowNav }) => {
 
   const { activeBoard, setActiveBoard } = useContext(BoardsContext)
   const { theme, setTheme } = useContext(ThemeContext)
+  const { modal, setModal } = useContext(ModalContext)
   const boards = useSelector(state => state.boards.boardsArray)
+
+  console.log(modal)
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
@@ -45,7 +49,7 @@ const Navigation = ( { showNav, setShowNav }) => {
           })}
           <div className='nav__board-name'>
             <img className='nav__board-icon' src="./assets/icon-board.svg" alt="board icon" />
-            <li className='nav__create-new-board'>+ Create a New Board</li>
+            <li onClick={()=> setModal('addBoard')} className='nav__create-new-board'>+ Create New Board</li>
           </div>
         </ul>
         }

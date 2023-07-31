@@ -13,7 +13,7 @@ const Column = ( {column}) => {
       </div>
       {column.tasks.map((task, index) => {
         return (
-          <Task task={task} />
+          <Task key={index} task={task} />
         )
       })}
     </div>  
