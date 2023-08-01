@@ -8,10 +8,10 @@ const Column = ( {column}) => {
         <div style={{backgroundColor: column.name === 'Todo' ? '#49C4E5' : column.name === 'Doing' ? '#8471F2' : column.name === 'Done' ? '#67E2AE' : '#8471F2'}} className='column__circle'>
         </div>
         <div className="column__name">
-          {column.name} ( {column.tasks.length} )
+          {column.name} ( {column.tasks ? column.tasks.length : 0} )
         </div>
       </div>
-      {column.tasks.map((task, index) => {
+      {column.tasks && column.tasks.map((task, index) => {
         return (
           <Task key={index} task={task} />
         )

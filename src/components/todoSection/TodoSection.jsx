@@ -6,6 +6,7 @@ import './todosection.css'
 const TodoSection = () => {
 
   const { activeBoard } = useContext(BoardsContext)
+  console.log(activeBoard)
 
   return (
     <main className='todo-section'>
