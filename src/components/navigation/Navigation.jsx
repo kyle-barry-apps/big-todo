@@ -47,7 +47,7 @@ const Navigation = ( { showNav, setShowNav }) => {
               </div>
             )
           })}
-          <div className='nav__board-name'>
+          <div onClick={()=> setModal('addBoard')} className='nav__board-name'>
             <img className='nav__board-icon' src="./assets/icon-board.svg" alt="board icon" />
             <li onClick={()=> setModal('addBoard')} className='nav__create-new-board'>+ Create New Board</li>
           </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { addBoard } from '../../../features/boards/boardsSlice'
 import { useContext } from 'react'
@@ -11,9 +11,12 @@ const AddBoard = () => {
   const [columns, setColumns] = useState([{name: 'Todo', tasks: []}, {name: 'Doing', tasks: []}])
   const [newColumnToggle, setNewColumnToggle] = useState(false)
   const [newColumnValue, setNewColumnValue] = useState('')
-  const { setModal } = useContext(ModalContext)
+  const { modal, setModal } = useContext(ModalContext)
+
+  console.log(modal)
 
   const dispatch = useDispatch()
+  let modal_ref = useRef()
 
   const removeColumn = (index) => {
     const updatedColumns = [...columns];
@@ -30,8 +33,23 @@ const AddBoard = () => {
     }
   }
 
+  useEffect(() => {
+      const handler = (e) => {
+        if(!modal_ref.current.contains(e.target)) {
+          setModal(null)
+        }
+    }
+
+    document.addEventListener('mousedown', handler)
+
+    return() => {
+      document.removeEventListener('mousedown', handler)
+    }
+  }, [modal])
+
+
   return (
-    <div className='modal-container'>
+    <div className='modal-container' ref={modal_ref}>
       <div className="addBoard__title">
         Add New Board
       </div>
