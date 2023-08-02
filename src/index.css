@@ -30,4 +30,5 @@ body {
   cursor: pointer;
   transition: .15s;
   align-items: center;
+  text-align: center;
 }

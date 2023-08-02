@@ -27,6 +27,10 @@ export const boardsSlice = createSlice({
         name: action.payload.name,
         columns: action.payload.columns
       })
+    },
+    deleteBoard: (state, action) => {
+      const updatedBoardsArray = state.boardsArray.filter(board => board.name !== action.payload.name);
+      return { ...state, boardsArray: updatedBoardsArray };
     }
   },
   extraReducers(builder) {
@@ -46,5 +50,5 @@ export const boardsSlice = createSlice({
   }
 })
 
-export const { addBoard } = boardsSlice.actions
+export const { addBoard, deleteBoard } = boardsSlice.actions
 export default boardsSlice.reducer

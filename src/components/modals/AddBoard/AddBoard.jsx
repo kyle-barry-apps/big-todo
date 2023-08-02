@@ -3,26 +3,24 @@ import { useDispatch } from 'react-redux'
 import { addBoard } from '../../../features/boards/boardsSlice'
 import { useContext } from 'react'
 import { ModalContext } from '../../../contexts/ModalContext'
+import { AiOutlinePlus } from 'react-icons/ai'
 import './addBoard.css'
 import '../modals.css'
 
 const AddBoard = () => {
   const [boardName, setBoardName] = useState('')
+
   const [columns, setColumns] = useState([{name: 'Todo', tasks: []}, {name: 'Doing', tasks: []}])
   const [newColumnToggle, setNewColumnToggle] = useState(false)
-  const [newColumnValue, setNewColumnValue] = useState('')
+  const [newColumnValue, setNewColumnValue] = useState({name: '', tasks: []})
   const { modal, setModal } = useContext(ModalContext)
-
-  console.log(modal)
 
   const dispatch = useDispatch()
   let modal_ref = useRef()
 
   const removeColumn = (index) => {
     const updatedColumns = [...columns];
-
     updatedColumns.splice(index, 1);
-
     setColumns(updatedColumns);
   }
 
@@ -33,11 +31,16 @@ const AddBoard = () => {
     }
   }
 
+  const handleAddColumn = (e) => {
+    setColumns([...columns, newColumnValue])
+    setNewColumnToggle(false)
+  }
+
   useEffect(() => {
-      const handler = (e) => {
-        if(!modal_ref.current.contains(e.target)) {
-          setModal(null)
-        }
+    const handler = (e) => {
+      if(!modal_ref.current.contains(e.target)) {
+        setModal(null)
+      }
     }
 
     document.addEventListener('mousedown', handler)
@@ -45,7 +48,7 @@ const AddBoard = () => {
     return() => {
       document.removeEventListener('mousedown', handler)
     }
-  }, [modal])
+  }, [modal, setModal])
 
 
   return (
@@ -58,6 +61,7 @@ const AddBoard = () => {
           Board Name
         </div>
         <input value={boardName} onChange={(e) => setBoardName(e.target.value)} className='addBoard__input' type="text" placeholder='e.g. Web Design' />
+        {/* {<div className='boardName__error-message'>Can't be empty</div>} */}
       </div>
       <div className='addBoard__column-container'>
         <span>Board Columns</span>
@@ -73,8 +77,11 @@ const AddBoard = () => {
         })}
       </div>
       {newColumnToggle && 
-      <div className="addBoard_column">
-        <input value={newColumnValue} onChange={(e) => setNewColumnValue(e.target.value)} type="text" className='create_column' placeholder='e.g. Done' />
+      <div className="addBoard__column">
+        <input className='addBoard__column-name' value={newColumnValue.name} onChange={(e) => setNewColumnValue({name: e.target.value, tasks: []})} type="text" placeholder='e.g. Done' />
+        <div onClick={handleAddColumn} className='addBoard__column-add'>
+          <AiOutlinePlus className='addBoard__column_icon' size={22}/>
+        </div>
       </div>
       }
       <div onClick={() => setNewColumnToggle(!newColumnToggle)} className="btn add-new-column">+ Add New Column</div>

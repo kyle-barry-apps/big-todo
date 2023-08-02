@@ -13,6 +13,14 @@
   color: white;
 }
 
+.addBoard__input.boardName-error {
+  border: 1px solid var(--warning-text);
+}
+
+.addBoard__name-container {
+  position: relative;
+}
+
 .addBoard__input:focus {
   outline: none;
 }
@@ -20,16 +28,28 @@
 .addBoard__column {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  
+  gap: 1rem; 
+}
+
+.boardName__error-message {
+  position: absolute;
+  right: 1rem;
+  top: 2.7rem;
+  color: var(--warning-text);
 }
 
 .addBoard__column-name {
   padding: .7rem 1rem;
   border: 1px solid #414552;
+  background-color: transparent;
   width: 100%;
   border-radius: 4px;
   font-size: .8rem;
+  color: white;
+}
+
+.addBoard__column input:focus {
+  outline: none;
 }
 
 .add-new-column, .add-new-board {
@@ -48,13 +68,13 @@
   gap: 1rem;
 }
 
-.addBoard__column-delete {
+.addBoard__column-delete, .addBoard__column-add {
   padding: .5rem;
   cursor: pointer;
   transition: .15s;
 }
 
-.addBoard__column-delete:hover {
+.addBoard__column-delete:hover, .addBoard__icon:hover {
   opacity: .8;
 }
 

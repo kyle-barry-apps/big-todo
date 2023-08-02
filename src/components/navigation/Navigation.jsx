@@ -9,17 +9,15 @@ const Navigation = ( { showNav, setShowNav }) => {
 
   const { activeBoard, setActiveBoard } = useContext(BoardsContext)
   const { theme, setTheme } = useContext(ThemeContext)
-  const { modal, setModal } = useContext(ModalContext)
+  const { setModal } = useContext(ModalContext)
   const boards = useSelector(state => state.boards.boardsArray)
-
-  console.log(modal)
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
   useEffect(() => {
-    if (boards.length > 0 && !activeBoard) {
+    if (boards && boards.length > 0 && !activeBoard) {
       setActiveBoard(boards[0]);
     }
   }, [boards, activeBoard, setActiveBoard]);
@@ -36,8 +34,8 @@ const Navigation = ( { showNav, setShowNav }) => {
   return (
     <nav className={showNav ? 'nav' : 'nav hidden'}> 
       <div>
-      <span className='nav__boards-number'>All Boards ( {boards.length} )</span>
-        {boards &&
+      <span className='nav__boards-number'>All Boards ( {boards && boards.length} )</span>
+        {boards ?
         <ul>
           {boards.map((b, index) => {
             return (
@@ -52,6 +50,13 @@ const Navigation = ( { showNav, setShowNav }) => {
             <li onClick={()=> setModal('addBoard')} className='nav__create-new-board'>+ Create New Board</li>
           </div>
         </ul>
+        :  
+          <ul>
+            <div onClick={()=> setModal('addBoard')} className='nav__board-name'>
+              <img className='nav__board-icon' src="./assets/icon-board.svg" alt="board icon" />
+              <li onClick={()=> setModal('addBoard')} className='nav__create-new-board'>+ Create New Board</li>
+            </div>
+          </ul>
         }
       </div>
       <div className='nav__mode-sidebar'>
