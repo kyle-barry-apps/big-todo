@@ -10,6 +10,11 @@ const Header = () => {
 
   const boardOptionsRef = useRef()
 
+  const handleEditClick = () => {
+    setModal('editBoard')
+    setShowBoardOptions(false)
+  }
+
   const handleDeleteClick = () => {
     setModal('deleteBoard')
     setShowBoardOptions(false)
@@ -44,7 +49,7 @@ const Header = () => {
         </div>
       </div>
       <div ref={boardOptionsRef} className={showBoardOptions ? 'header__board-options active' : 'header__board-options'}>
-        <div className='header__edit'>Edit Board</div>
+        <div onClick={handleEditClick} className='header__edit'>Edit Board</div>
         <div onClick={handleDeleteClick} className='header__delete'>Delete Board</div>
       </div>
     </header>

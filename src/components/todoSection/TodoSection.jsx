@@ -13,10 +13,14 @@ const TodoSection = () => {
         return (
           <Column key={index} column={column}/>
         )
-      })}
+      })
+      }
+      {activeBoard && 
       <div className="todo-section__add-new-column">
         <div>+ New Column</div>
       </div>
+      }
+ 
     </main>
   )
 }

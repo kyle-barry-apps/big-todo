@@ -31,6 +31,15 @@ export const boardsSlice = createSlice({
     deleteBoard: (state, action) => {
       const updatedBoardsArray = state.boardsArray.filter(board => board.name !== action.payload.name);
       return { ...state, boardsArray: updatedBoardsArray };
+    },
+    updateBoard: (state, action) => {
+      const { updatedBoard, activeBoard } = action.payload;
+
+      const updatedBoardsArray = state.boardsArray.map((board) =>
+        board.name === activeBoard.name ? updatedBoard : board
+      );
+
+      state.boardsArray = updatedBoardsArray;
     }
   },
   extraReducers(builder) {
@@ -50,5 +59,5 @@ export const boardsSlice = createSlice({
   }
 })
 
-export const { addBoard, deleteBoard } = boardsSlice.actions
+export const { addBoard, deleteBoard, updateBoard } = boardsSlice.actions
 export default boardsSlice.reducer

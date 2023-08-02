@@ -6,6 +6,7 @@ import { ModalContext } from '../contexts/ModalContext'
 import './layout.css'
 import AddBoard from './modals/AddBoard/AddBoard'
 import DeleteBoard from './modals/DeleteBoard/DeleteBoard'
+import EditBoard from './modals/EditBoard/EditBoard'
 
 const Layout = () => {
 
@@ -14,6 +15,7 @@ const Layout = () => {
 
   return (
     <>
+    {modal === 'editBoard' ? <EditBoard /> : null}
     {modal === 'addBoard' ? <AddBoard /> : null}
     {modal === 'deleteBoard' ? <DeleteBoard /> : null}
     {modal && <div className='overlay'></div>}
