@@ -40,6 +40,17 @@ export const boardsSlice = createSlice({
       );
 
       state.boardsArray = updatedBoardsArray;
+    },
+    addColumn: (state, action) => {
+      const { updatedBoard, activeBoard } = action.payload
+      console.log('here')
+      console.log(updatedBoard)
+
+      const updatedBoardsArray = state.boardsArray.map((board) => 
+        board.name === activeBoard.name ? updatedBoard : board
+      )
+
+      state.boardsArray = updatedBoardsArray;
     }
   },
   extraReducers(builder) {
@@ -59,5 +70,5 @@ export const boardsSlice = createSlice({
   }
 })
 
-export const { addBoard, deleteBoard, updateBoard } = boardsSlice.actions
+export const { addBoard, deleteBoard, updateBoard, addColumn } = boardsSlice.actions
 export default boardsSlice.reducer
