@@ -57,6 +57,7 @@
   border-radius: 23px;
   gap: .5rem;
   width: 15rem;
+  z-index: 1000;
 }
 
 .header__board-options.active {

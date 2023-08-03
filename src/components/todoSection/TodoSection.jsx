@@ -14,6 +14,10 @@ const TodoSection = () => {
   const [ newColumnToggle, setNewColumnToggle ] = useState(false)
 
   useEffect(() => {
+    setNewColumnToggle(false)
+  }, [activeBoard])
+
+  useEffect(() => {
     setUpdatedBoard(activeBoard);
   }, [activeBoard]);
 
@@ -29,13 +33,19 @@ const TodoSection = () => {
 
   return (
     <main className='todo-section'>
-      {activeBoard && activeBoard.columns.map((column, index) => {
+      {activeBoard && activeBoard.columns.length > 0 && activeBoard.columns.map((column, index) => {
         return (
           <Column key={index} column={column}/>
         )
       })
       }
-      {activeBoard && !newColumnToggle &&
+      {activeBoard && activeBoard.columns.length === 0 && 
+      <div className='todo-section__no_columns'>
+        <p>The board is empty. Create a new column to get started</p>
+        <div className="todo-section__add-column-btn btn">+ Add New Column</div>
+      </div>
+      }
+      {activeBoard && activeBoard.columns.length > 0 && !newColumnToggle &&
       <div onClick={()=> setNewColumnToggle(!newColumnToggle)} className="todo-section__add-new-column">
         <div>+ New Column</div>
       </div>
@@ -43,7 +53,7 @@ const TodoSection = () => {
       {activeBoard && newColumnToggle &&
         <div className="todo-section__add-new-column">
           <form onSubmit={handleSubmitNewColumn} className="todo-section__input">
-            <input value={newColumnValue.name} onChange={(e) => setNewColumnValue({name: e.target.value, tasks: []})} className='todo-section__add-new-column-name' type="text" />
+            <input autoFocus value={newColumnValue.name} onChange={(e) => setNewColumnValue({name: e.target.value, tasks: []})} className='todo-section__add-new-column-name' type="text" />
             <div>
               <button className='todo-section__add-new-column-btn' type='submit'></button>
             </div>

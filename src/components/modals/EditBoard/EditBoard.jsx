@@ -31,7 +31,7 @@ const EditBoard = () => {
   }
 
   const editBoard = () => {
-    if (updatedBoard && updatedBoard.columns.length > 0) {
+    if (updatedBoard) {
       dispatch(updateBoard({updatedBoard, activeBoard}))  
       setActiveBoard(updatedBoard)
       setModal(null)

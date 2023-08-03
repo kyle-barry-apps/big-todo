@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { BoardsProvider } from './contexts/BoardsContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ModalProvider } from './contexts/ModalContext';
@@ -14,7 +14,6 @@ function App() {
   useEffect(() => {
     dispatch(fetchBoards())
   }, [dispatch])
-
  
   return (
     <ModalProvider> 
