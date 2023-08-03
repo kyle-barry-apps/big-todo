@@ -1,0 +1,33 @@
+.addColumn-input {
+  padding: .5rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+}
+
+.addColumn-input:focus {
+  outline: none;
+}
+
+.addColumn-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+.addColumn-input {
+  width: 20rem;
+  text-align: center;
+}
+
+.addColumn-btn {
+  background-color: var(--primary-purple);
+  padding: .7rem 3rem;
+}
+
+.addColumn-btn:hover {
+  background-color: var(--primary-purple-hover);
+}
