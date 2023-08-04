@@ -1,0 +1,59 @@
+.viewTask__title-container { 
+  display: flex;
+  justify-content: space-between;
+}
+
+.viewTask__ellipsis {
+  padding: .5rem;
+  cursor: pointer;
+}
+
+.viewTask__description {
+  color: var(--primary-text);
+  line-height: 1.7;
+}
+
+.viewTask__subtask-container {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.viewTask__subtask-container h2 {
+  font-size: .8rem;
+}
+
+.viewTask__subtasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.viewTask__subtask {
+  display: flex;
+  align-items: center;
+  background-color: #20212C;
+}
+
+.viewTask__checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.viewTask__checkbox {
+  display: none;
+}
+
+.viewTask__checkbox + label {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.viewTask__checkbox:checked + label {
+  background: var(--primary-purple); /* Background color for the checked state */
+}

@@ -3,12 +3,14 @@ import { useDispatch } from "react-redux";
 import { BoardsContext } from "../../contexts/BoardsContext";
 import { addColumn } from "../../features/boards/boardsSlice";
 import { ModalContext } from "../../contexts/ModalContext";
+// import { ThemeContext } from "../../contexts/ThemeContext";
 import Column from "../column/Column";
 import "./todosection.css";
 
 const TodoSection = () => {
   const { activeBoard, setActiveBoard } = useContext(BoardsContext);
   const { setModal } = useContext(ModalContext);
+  // const { theme, setTheme } = useContext(ThemeContext);
   const [updatedBoard, setUpdatedBoard] = useState(activeBoard);
 
   const [newColumnValue, setNewColumnValue] = useState({ name: "", tasks: [] });

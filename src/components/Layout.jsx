@@ -8,6 +8,9 @@ import AddBoard from "./modals/AddBoard/AddBoard";
 import DeleteBoard from "./modals/DeleteBoard/DeleteBoard";
 import EditBoard from "./modals/EditBoard/EditBoard";
 import AddColumn from "./modals/AddColumn/AddColumn";
+import ViewTask from "./modals/ViewTask/ViewTask";
+import EditTask from "./modals/EditTask/EditTask";
+import AddTask from "./modals/AddTask/AddTask";
 
 const Layout = () => {
   const { modal } = useContext(ModalContext);
@@ -15,6 +18,9 @@ const Layout = () => {
 
   return (
     <>
+      {modal === "viewTask" && <ViewTask />}
+      {modal === "editTask" && <EditTask />}
+      {modal === "addTask" && <AddTask />}
       {modal === "addColumn" && <AddColumn />}
       {modal === "editBoard" && <EditBoard />}
       {modal === "addBoard" && <AddBoard />}

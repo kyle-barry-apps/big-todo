@@ -3,7 +3,7 @@
   flex-direction: column;
   position: absolute;
   z-index: 1000;
-  background-color: var(--primary-very-dark);
+  background-color: #2B2C37;
   padding: 2rem;
   color: white;
   gap: 1rem;
