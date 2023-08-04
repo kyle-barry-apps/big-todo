@@ -21,6 +21,7 @@
 
 .viewTask__subtask-container h2 {
   font-size: .8rem;
+  margin-bottom: .7rem;
 }
 
 .viewTask__subtasks-list {
@@ -33,13 +34,18 @@
   display: flex;
   align-items: center;
   background-color: #20212C;
+  border-radius: 5px;
+}
+
+.viewTask__subtask-title {
+  padding: .7rem 1rem .7rem 0rem;
 }
 
 .viewTask__checkbox-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0rem 1rem;
 }
 
 .viewTask__checkbox {
@@ -50,6 +56,7 @@
   display: inline-block;
   width: 15px;
   height: 15px;
+  border: 1px solid var(--primary-text);
   border-radius: 4px;
   cursor: pointer;
 }
@@ -57,3 +64,54 @@
 .viewTask__checkbox:checked + label {
   background: var(--primary-purple); /* Background color for the checked state */
 }
+
+.viewTask__column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.viewTask__columnName {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--primary-text);
+  border-radius: 5px;
+  padding: .7rem .9rem;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.viewTask__columnName.active {
+  border: 1px solid var(--primary-purple);
+}
+
+.viewTask__columnName img {
+  height: 8px;
+  width: 11px;
+}
+
+.viewTask__columnDropdown {
+  display: flex;
+  position: absolute;
+  bottom: -7.5rem;
+  left: 0rem;
+  background-color: var(--primary-very-dark);
+  width: 26rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.viewTask__columnDropdown-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  gap: 1rem;
+  color: var(--primary-text);
+}
+
+.viewTask__columnDropdown-list li {
+  cursor: pointer;
+}
+

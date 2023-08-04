@@ -1,11 +1,15 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { ModalContext } from "../../../contexts/ModalContext";
+import { BoardsContext } from "../../../contexts/BoardsContext";
 import "./viewTask.css";
 
 const ViewTask = () => {
   const { modal, setModal } = useContext(ModalContext);
+  const { activeBoard, setActiveBoard } = useContext(BoardsContext);
   const { activeTask, setActiveTask } = useContext(TaskContext);
+
+  const [columnDropdownToggle, setColumnDropdownToggle] = useState(false);
 
   console.log(activeTask);
 
@@ -58,16 +62,34 @@ const ViewTask = () => {
                   />
                   <label htmlFor={checkboxId}></label>
                 </div>
-                <span>{subtask.title}</span>
+                <div className="viewTask__subtask-title">
+                  <span>{subtask.title}</span>
+                </div>
               </div>
             );
           })}
         </div>
         <div className="viewTask__column">
           <h2>Current Status</h2>
-          <div className="viewTask__columnName">
+          <div
+            onClick={() => setColumnDropdownToggle(!columnDropdownToggle)}
+            className={
+              columnDropdownToggle
+                ? "viewTask__columnName active"
+                : "viewTask__columnName"
+            }
+          >
             <span>{activeTask.status}</span>
             <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
+            {columnDropdownToggle && (
+              <div className="viewTask__columnDropdown">
+                <u className="viewTask__columnDropdown-list">
+                  {activeBoard.columns.map((column, index) => {
+                    return <li>{column.name}</li>;
+                  })}
+                </u>
+              </div>
+            )}
           </div>
         </div>
       </div>
