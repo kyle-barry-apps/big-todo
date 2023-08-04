@@ -51,6 +51,19 @@ export const boardsSlice = createSlice({
       )
 
       state.boardsArray = updatedBoardsArray;
+    },
+    changeColumn: (state, action) => {
+        const updatedBoard = action.payload;
+
+        // Find the index of the board in the boardsArray
+        const boardIndex = state.boardsArray.findIndex(
+          (board) => board.name === updatedBoard.name
+        );
+
+        if (boardIndex !== -1) {
+          // Update the entire board in the boardsArray
+          state.boardsArray[boardIndex] = updatedBoard;
+        }
     }
   },
   extraReducers(builder) {
@@ -70,5 +83,5 @@ export const boardsSlice = createSlice({
   }
 })
 
-export const { addBoard, deleteBoard, updateBoard, addColumn } = boardsSlice.actions
+export const { addBoard, deleteBoard, updateBoard, addColumn, changeColumn } = boardsSlice.actions
 export default boardsSlice.reducer

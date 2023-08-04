@@ -1,7 +1,9 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { ModalContext } from "../../../contexts/ModalContext";
 import { BoardsContext } from "../../../contexts/BoardsContext";
+import { changeColumn } from "../../../features/boards/boardsSlice";
 import "./viewTask.css";
 
 const ViewTask = () => {
@@ -10,10 +12,52 @@ const ViewTask = () => {
   const { activeTask, setActiveTask } = useContext(TaskContext);
 
   const [columnDropdownToggle, setColumnDropdownToggle] = useState(false);
-
-  console.log(activeTask);
-
   const modal_ref = useRef();
+  const dispatch = useDispatch();
+
+  const handleChangeColumn = (column) => {
+    const updatedTask = { ...activeTask, status: column.name };
+    const activeColumn = activeBoard.columns.find(
+      (col) => col.name === activeTask.status
+    );
+
+    const updatedColumn = {
+      ...activeColumn,
+      tasks: activeColumn.tasks.filter(
+        (task) => task.title !== updatedTask.title
+      ),
+    };
+
+    const destinationColumn = activeBoard.columns.find(
+      (col) => col.name === column.name
+    );
+
+    const updatedDestinationColumn = {
+      ...destinationColumn,
+      tasks: [...destinationColumn.tasks, updatedTask],
+    };
+
+    const updatedColumns = activeBoard.columns.map((col) => {
+      if (col.name === activeTask.status) {
+        return updatedColumn;
+      } else if (col.name === column.name) {
+        return updatedDestinationColumn;
+      }
+      return col;
+    });
+
+    // Create a new board object with the updated columns array
+    const updatedBoard = { ...activeBoard, columns: updatedColumns };
+
+    // Update the state with the new updatedBoard
+    setActiveTask(updatedTask);
+    setActiveBoard(updatedBoard);
+
+    // Dispatch the updated board to the Redux store if you need to keep the state across the application
+    dispatch(changeColumn(updatedBoard));
+    setColumnDropdownToggle(false);
+    setModal(null);
+  };
 
   useEffect(() => {
     const handler = (e) => {
@@ -83,11 +127,18 @@ const ViewTask = () => {
             <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
             {columnDropdownToggle && (
               <div className="viewTask__columnDropdown">
-                <u className="viewTask__columnDropdown-list">
+                <ul className="viewTask__columnDropdown-list">
                   {activeBoard.columns.map((column, index) => {
-                    return <li>{column.name}</li>;
+                    return (
+                      <li
+                        key={index}
+                        onClick={() => handleChangeColumn(column)}
+                      >
+                        {column.name}
+                      </li>
+                    );
                   })}
-                </u>
+                </ul>
               </div>
             )}
           </div>
