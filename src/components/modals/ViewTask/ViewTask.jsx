@@ -13,6 +13,8 @@ const ViewTask = () => {
 
   const [columnDropdownToggle, setColumnDropdownToggle] = useState(false);
   const modal_ref = useRef();
+  const columnDropdownRef = useRef();
+
   const dispatch = useDispatch();
 
   const handleChangeColumn = (column) => {
@@ -73,6 +75,22 @@ const ViewTask = () => {
     };
   }, [modal, setModal]);
 
+  useEffect(() => {
+    if (columnDropdownRef.current) {
+      const handler = (e) => {
+        if (!columnDropdownRef.current.contains(e.target)) {
+          setColumnDropdownToggle(false);
+        }
+      };
+
+      document.addEventListener("mousedown", handler);
+
+      return () => {
+        document.removeEventListener("mousedown", handler);
+      };
+    }
+  }, [columnDropdownToggle, setColumnDropdownToggle]);
+
   return (
     <div ref={modal_ref} className="modal-container">
       <div className="viewTask__title-container">
@@ -126,9 +144,12 @@ const ViewTask = () => {
             <span>{activeTask.status}</span>
             <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
             {columnDropdownToggle && (
-              <div className="viewTask__columnDropdown">
+              <div className="viewTask__columnDropdown" ref={columnDropdownRef}>
                 <ul className="viewTask__columnDropdown-list">
                   {activeBoard.columns.map((column, index) => {
+                    if (column.name === activeTask.status) {
+                      return null;
+                    }
                     return (
                       <li
                         key={index}

@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchBoards())
   }, [dispatch])
- 
+
   return (
     <TaskProvider>
       <ModalProvider> 
