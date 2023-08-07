@@ -109,9 +109,36 @@
   text-decoration: none;
   gap: 1rem;
   color: var(--primary-text);
+  width: 100%;
 }
 
 .viewTask__columnDropdown-list li {
   cursor: pointer;
+  width: 100%;
 }
 
+.viewTask__edit-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: #20212C;
+  width: 10rem;
+  position: absolute;
+  right: -1rem;
+  top: 5rem;
+}
+
+.viewTask__edit-dropdown span {
+  transition: .15s;
+  cursor: pointer;
+}
+
+.viewTask__delete-task {
+  color: var(--warning-text);
+}
+
+.viewTask__edit-dropdown span:hover {
+  opacity: .8;
+}

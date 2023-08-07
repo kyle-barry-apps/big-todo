@@ -3,19 +3,54 @@ import { useDispatch } from "react-redux";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { ModalContext } from "../../../contexts/ModalContext";
 import { BoardsContext } from "../../../contexts/BoardsContext";
-import { changeColumn } from "../../../features/boards/boardsSlice";
+import {
+  changeColumn,
+  updateBoard,
+} from "../../../features/boards/boardsSlice";
 import "./viewTask.css";
 
 const ViewTask = () => {
   const { modal, setModal } = useContext(ModalContext);
   const { activeBoard, setActiveBoard } = useContext(BoardsContext);
   const { activeTask, setActiveTask } = useContext(TaskContext);
-
   const [columnDropdownToggle, setColumnDropdownToggle] = useState(false);
+  const [editTaskToggle, setEditTaskToggle] = useState(false);
   const modal_ref = useRef();
   const columnDropdownRef = useRef();
+  const editTaskDropdownRef = useRef();
 
   const dispatch = useDispatch();
+
+  const handleEditTask = () => {
+    setModal("editTask");
+  };
+
+  const handleDeleteTask = () => {
+    const activeColumn = activeBoard.columns.find(
+      (col) => col.name === activeTask.status
+    );
+
+    const updatedColumn = {
+      ...activeColumn,
+      tasks: activeColumn.tasks.filter((task) => {
+        return task.title !== activeTask.title;
+      }),
+    };
+
+    const updatedBoard = {
+      ...activeBoard,
+      columns: activeBoard.columns.map((column) => {
+        return column.name !== updatedColumn.name ? column : updatedColumn;
+      }),
+    };
+
+    setActiveBoard(updatedBoard);
+    dispatch(updateBoard({ updatedBoard, activeBoard }));
+
+    setColumnDropdownToggle(false);
+    setEditTaskToggle(false);
+    setModal(null);
+  };
 
   const handleChangeColumn = (column) => {
     const updatedTask = { ...activeTask, status: column.name };
@@ -58,6 +93,7 @@ const ViewTask = () => {
     // Dispatch the updated board to the Redux store if you need to keep the state across the application
     dispatch(changeColumn(updatedBoard));
     setColumnDropdownToggle(false);
+    setEditTaskToggle(false);
     setModal(null);
   };
 
@@ -74,6 +110,22 @@ const ViewTask = () => {
       document.removeEventListener("mousedown", handler);
     };
   }, [modal, setModal]);
+
+  useEffect(() => {
+    if (editTaskDropdownRef.current) {
+      const handler = (e) => {
+        if (!editTaskDropdownRef.current.contains(e.target)) {
+          setEditTaskToggle(false);
+        }
+      };
+
+      document.addEventListener("mousedown", handler);
+
+      return () => {
+        document.removeEventListener("mousedown", handler);
+      };
+    }
+  }, [editTaskToggle, setEditTaskToggle]);
 
   useEffect(() => {
     if (columnDropdownRef.current) {
@@ -95,8 +147,24 @@ const ViewTask = () => {
     <div ref={modal_ref} className="modal-container">
       <div className="viewTask__title-container">
         <h2>{activeTask.title}</h2>
-        <div className="viewTask__ellipsis">
+        <div
+          className="viewTask__ellipsis"
+          onClick={() => setEditTaskToggle(!editTaskToggle)}
+        >
           <img src="./assets/icon-vertical-ellipsis.svg" alt="ellipsis" />
+          {editTaskToggle && (
+            <div className="viewTask__edit-dropdown" ref={editTaskDropdownRef}>
+              <span className="viewTask__edit-task" onClick={handleEditTask}>
+                Edit Task
+              </span>
+              <span
+                onClick={handleDeleteTask}
+                className="viewTask__delete-task"
+              >
+                Delete Task
+              </span>
+            </div>
+          )}
         </div>
       </div>
       <p className="viewTask__description">{activeTask.description}</p>
