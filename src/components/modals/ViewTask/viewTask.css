@@ -41,6 +41,11 @@
   padding: .7rem 1rem .7rem 0rem;
 }
 
+.checked-subtask-title {
+  text-decoration: line-through;
+  color: gray;
+}
+
 .viewTask__checkbox-container {
   display: flex;
   align-items: center;
@@ -79,7 +84,7 @@
   padding: .7rem .9rem;
   align-items: center;
   cursor: pointer;
-  position: relative;
+  /* position: relative; */
 }
 
 .viewTask__columnName.active {
@@ -94,8 +99,8 @@
 .viewTask__columnDropdown {
   display: flex;
   position: absolute;
-  bottom: -7.5rem;
-  left: 0rem;
+  bottom: -3.5rem;
+  left: 2rem;
   background-color: var(--primary-very-dark);
   width: 26rem;
   padding: 1rem;

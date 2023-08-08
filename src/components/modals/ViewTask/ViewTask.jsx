@@ -25,6 +25,62 @@ const ViewTask = () => {
     setModal("editTask");
   };
 
+  const handleCheckboxChange = (event) => {
+    const subtaskTitleElement = event.target
+      .closest(".viewTask__subtask")
+      .querySelector(".viewTask__subtask-title span");
+
+    if (subtaskTitleElement) {
+      subtaskTitleElement.classList.toggle(
+        "checked-subtask-title",
+        event.target.checked
+      );
+
+      const activeSubtask = activeTask.subtasks.find(
+        (sub) => sub.title === subtaskTitleElement.innerHTML
+      );
+
+      const updatedSubtask = {
+        ...activeSubtask,
+        isCompleted: !activeSubtask.isCompleted,
+      };
+
+      const updatedTask = {
+        ...activeTask,
+        subtasks: activeTask.subtasks.map((subtask) => {
+          return subtask.title === updatedSubtask.title
+            ? updatedSubtask
+            : subtask;
+        }),
+      };
+
+      const activeColumn = activeBoard.columns.find(
+        (col) => col.name === activeTask.status
+      );
+
+      const updatedColumn = {
+        ...activeColumn,
+        tasks: activeColumn.tasks.map((task) => {
+          return task.title === updatedTask.title ? updatedTask : task;
+        }),
+      };
+
+      const updatedBoard = {
+        ...activeBoard,
+        columns: activeBoard.columns.map((column) => {
+          return column.name !== updatedColumn.name ? column : updatedColumn;
+        }),
+      };
+
+      setActiveBoard(updatedBoard);
+      setActiveTask(updatedTask);
+      dispatch(updateBoard({ updatedBoard, activeBoard }));
+
+      setColumnDropdownToggle(false);
+      setEditTaskToggle(false);
+    }
+  };
+
   const handleDeleteTask = () => {
     const activeColumn = activeBoard.columns.find(
       (col) => col.name === activeTask.status
@@ -189,11 +245,19 @@ const ViewTask = () => {
                     className="viewTask__checkbox"
                     type="checkbox"
                     id={checkboxId}
+                    onChange={handleCheckboxChange}
+                    checked={subtask.isCompleted}
                   />
                   <label htmlFor={checkboxId}></label>
                 </div>
                 <div className="viewTask__subtask-title">
-                  <span>{subtask.title}</span>
+                  <span
+                    className={
+                      subtask.isCompleted ? "checked-subtask-title" : ""
+                    }
+                  >
+                    {subtask.title}
+                  </span>
                 </div>
               </div>
             );
