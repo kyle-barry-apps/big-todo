@@ -43,7 +43,12 @@ const Header = () => {
       <div className="header__info">
         <h1>{activeBoard ? activeBoard.name : null}</h1>
         <div className="button-ellipsis-group">
-          <button className="btn add-task-btn">+ Add New Task</button>
+          <button
+            className="btn add-task-btn"
+            onClick={() => setModal("addTask")}
+          >
+            + Add New Task
+          </button>
           <div
             onClick={() => setShowBoardOptions(!showBoardOptions)}
             className="header__ellipsis"
