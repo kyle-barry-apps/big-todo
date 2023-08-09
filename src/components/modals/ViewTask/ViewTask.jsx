@@ -224,77 +224,76 @@ const ViewTask = () => {
         </div>
       </div>
       <p className="viewTask__description">{activeTask.description}</p>
-      <div className="viewTask__subtask-container">
-        <h2>
-          Subtasks (
-          {
-            activeTask.subtasks.filter(
-              (subtask) => subtask.isCompleted === true
-            ).length
-          }{" "}
-          of {activeTask.subtasks.length})
-        </h2>
-        <div className="viewTask__subtasks-list">
-          {activeTask.subtasks.map((subtask, index) => {
-            const checkboxId = "checkbox" + index;
+      {activeTask.subtasks.length > 0 && (
+        <div className="viewTask__subtask-container">
+          <h2>
+            Subtasks (
+            {
+              activeTask.subtasks.filter(
+                (subtask) => subtask.isCompleted === true
+              ).length
+            }{" "}
+            of {activeTask.subtasks.length})
+          </h2>
+          <div className="viewTask__subtasks-list">
+            {activeTask.subtasks.map((subtask, index) => {
+              const checkboxId = "checkbox" + index;
 
-            return (
-              <div className="viewTask__subtask" key={index}>
-                <div className="viewTask__checkbox-container">
-                  <input
-                    className="viewTask__checkbox"
-                    type="checkbox"
-                    id={checkboxId}
-                    onChange={handleCheckboxChange}
-                    checked={subtask.isCompleted}
-                  />
-                  <label htmlFor={checkboxId}></label>
+              return (
+                <div className="viewTask__subtask" key={index}>
+                  <div className="viewTask__checkbox-container">
+                    <input
+                      className="viewTask__checkbox"
+                      type="checkbox"
+                      id={checkboxId}
+                      onChange={handleCheckboxChange}
+                      checked={subtask.isCompleted}
+                    />
+                    <label htmlFor={checkboxId}></label>
+                  </div>
+                  <div className="viewTask__subtask-title">
+                    <span
+                      className={
+                        subtask.isCompleted ? "checked-subtask-title" : ""
+                      }
+                    >
+                      {subtask.title}
+                    </span>
+                  </div>
                 </div>
-                <div className="viewTask__subtask-title">
-                  <span
-                    className={
-                      subtask.isCompleted ? "checked-subtask-title" : ""
-                    }
-                  >
-                    {subtask.title}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="viewTask__column">
-          <h2>Current Status</h2>
-          <div
-            onClick={() => setColumnDropdownToggle(!columnDropdownToggle)}
-            className={
-              columnDropdownToggle
-                ? "viewTask__columnName active"
-                : "viewTask__columnName"
-            }
-          >
-            <span>{activeTask.status}</span>
-            <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
-            {columnDropdownToggle && (
-              <div className="viewTask__columnDropdown" ref={columnDropdownRef}>
-                <ul className="viewTask__columnDropdown-list">
-                  {activeBoard.columns.map((column, index) => {
-                    if (column.name === activeTask.status) {
-                      return null;
-                    }
-                    return (
-                      <li
-                        key={index}
-                        onClick={() => handleChangeColumn(column)}
-                      >
-                        {column.name}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
+              );
+            })}
           </div>
+        </div>
+      )}
+      <div className="viewTask__column">
+        <h2>Current Status</h2>
+        <div
+          onClick={() => setColumnDropdownToggle(!columnDropdownToggle)}
+          className={
+            columnDropdownToggle
+              ? "viewTask__columnName active"
+              : "viewTask__columnName"
+          }
+        >
+          <span>{activeTask.status}</span>
+          <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
+          {columnDropdownToggle && (
+            <div className="viewTask__columnDropdown" ref={columnDropdownRef}>
+              <ul className="viewTask__columnDropdown-list">
+                {activeBoard.columns.map((column, index) => {
+                  if (column.name === activeTask.status) {
+                    return null;
+                  }
+                  return (
+                    <li key={index} onClick={() => handleChangeColumn(column)}>
+                      {column.name}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
