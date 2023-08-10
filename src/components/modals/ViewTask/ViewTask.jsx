@@ -216,7 +216,14 @@ const ViewTask = () => {
         >
           <img src="./assets/icon-vertical-ellipsis.svg" alt="ellipsis" />
           {editTaskToggle && (
-            <div className="viewTask__edit-dropdown" ref={editTaskDropdownRef}>
+            <div
+              className={
+                theme === "light"
+                  ? "viewTask__edit-dropdown light"
+                  : "viewTask__edit-dropdown"
+              }
+              ref={editTaskDropdownRef}
+            >
               <span className="viewTask__edit-task" onClick={handleEditTask}>
                 Edit Task
               </span>
@@ -247,7 +254,14 @@ const ViewTask = () => {
               const checkboxId = "checkbox" + index;
 
               return (
-                <div className="viewTask__subtask" key={index}>
+                <div
+                  className={
+                    theme === "light"
+                      ? "viewTask__subtask light"
+                      : "viewTask__subtask"
+                  }
+                  key={index}
+                >
                   <div className="viewTask__checkbox-container">
                     <input
                       className="viewTask__checkbox"
@@ -286,7 +300,14 @@ const ViewTask = () => {
           <span>{activeTask.status}</span>
           <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
           {columnDropdownToggle && (
-            <div className="viewTask__columnDropdown" ref={columnDropdownRef}>
+            <div
+              className={
+                theme === "light"
+                  ? "viewTask__columnDropdown light"
+                  : "viewTask__columnDropdown"
+              }
+              ref={columnDropdownRef}
+            >
               <ul className="viewTask__columnDropdown-list">
                 {activeBoard.columns.map((column, index) => {
                   if (column.name === activeTask.status) {

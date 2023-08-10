@@ -19,3 +19,7 @@
 .addTask__description:focus {
   outline: none;
 }
+
+.addTask__description.light {
+  color: black;
+}

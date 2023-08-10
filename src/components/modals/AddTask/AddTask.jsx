@@ -112,7 +112,9 @@ const AddTask = () => {
       <div className="addBoard__name-container">
         <div className="addBoard__name">Title</div>
         <input
-          className="addBoard__input"
+          className={
+            theme === "light" ? "addBoard__input light" : "addBoard__input"
+          }
           type="text"
           placeholder="e.g. Take a coffee break"
           value={taskTitle}
@@ -122,7 +124,11 @@ const AddTask = () => {
       <div className="addTask__description-container">
         <span>Description</span>
         <textarea
-          className="addTask__description"
+          className={
+            theme === "light"
+              ? "addTask__description light"
+              : "addTask__description"
+          }
           placeholder="e.g. It’s always good to take a break. This 15 minute break will 
           recharge the batteries a little."
           value={description}
@@ -135,7 +141,15 @@ const AddTask = () => {
           subtasks.map((subtask, index) => {
             return (
               <div key={index} className="addBoard__column">
-                <div className="addBoard__column-name">{subtask.title}</div>
+                <div
+                  className={
+                    theme === "light"
+                      ? "addBoard__column-name light"
+                      : "addBoard__column-name"
+                  }
+                >
+                  {subtask.title}
+                </div>
                 <div
                   onClick={() => removeSubtask(index)}
                   className="addBoard__column-delete"
@@ -153,7 +167,11 @@ const AddTask = () => {
             onChange={(e) =>
               setNewSubtask({ title: e.target.value, isCompleted: false })
             }
-            className="addBoard__column-name"
+            className={
+              theme === "light"
+                ? "addBoard__column-name light"
+                : "addBoard__column-name"
+            }
             type="text"
             placeholder=""
           />
@@ -164,7 +182,9 @@ const AddTask = () => {
       )}
       <div
         onClick={() => setNewSubtaskToggle(!newSubtaskToggle)}
-        className="btn add-new-column"
+        className={
+          theme === "light" ? "btn add-new-column light" : "btn add-new-column"
+        }
       >
         + Add New Subtask
       </div>
@@ -173,7 +193,9 @@ const AddTask = () => {
         <div
           onClick={() => setStatusDropdown(!statusDropdown)}
           className={
-            statusDropdown
+            statusDropdown && theme === "light"
+              ? "viewTask__columnName active light"
+              : statusDropdown && theme === "dark"
               ? "viewTask__columnName active"
               : "viewTask__columnName"
           }
@@ -181,7 +203,14 @@ const AddTask = () => {
           <span>{status}</span>
           <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
           {statusDropdown && (
-            <div className="viewTask__columnDropdown" ref={statusDropdownRef}>
+            <div
+              className={
+                theme === "light"
+                  ? "viewTask__columnDropdown light"
+                  : "viewTask__columnDropdown"
+              }
+              ref={statusDropdownRef}
+            >
               <ul className="viewTask__columnDropdown-list">
                 {activeBoard.columns.map((column, index) => {
                   if (column.name === status) {

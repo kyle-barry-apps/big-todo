@@ -13,6 +13,10 @@
   color: white;
 }
 
+.addBoard__input.light {
+  color: black;  
+}
+
 .addBoard__input.boardName-error {
   border: 1px solid var(--warning-text);
 }
@@ -48,8 +52,16 @@
   color: white;
 }
 
+.addBoard__column-name.light {
+  color: black;
+}
+
 .addBoard__column input:focus {
   outline: none;
+}
+
+.addBoard__column.light input {
+  color: black;
 }
 
 .add-new-column, .add-new-board {
@@ -81,6 +93,10 @@
 .add-new-column {
   background-color: white;
   color: var(--primary-purple);
+}
+
+.add-new-column.light {
+  background-color: #EFEFF9;
 }
 
 .add-new-board {

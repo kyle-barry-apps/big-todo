@@ -68,7 +68,9 @@ const AddBoard = () => {
         <input
           value={boardName}
           onChange={(e) => setBoardName(e.target.value)}
-          className="addBoard__input"
+          className={
+            theme === "light" ? "addBoard__input light" : "addBoard__input"
+          }
           type="text"
           placeholder="e.g. Web Design"
         />
@@ -77,8 +79,23 @@ const AddBoard = () => {
         <span>Board Columns</span>
         {columns.map((column, index) => {
           return (
-            <div key={index} className="addBoard__column">
-              <div className="addBoard__column-name">{column.name}</div>
+            <div
+              key={index}
+              className={
+                theme === "light"
+                  ? "addBoard__column light"
+                  : "addBoard__column"
+              }
+            >
+              <div
+                className={
+                  theme === "light"
+                    ? "addBoard__column-name light"
+                    : "addBoard__column-name"
+                }
+              >
+                {column.name}
+              </div>
               <div
                 onClick={() => removeColumn(index)}
                 className="addBoard__column-delete"
@@ -92,7 +109,11 @@ const AddBoard = () => {
       {newColumnToggle && (
         <div className="addBoard__column">
           <input
-            className="addBoard__column-name"
+            className={
+              theme === "light"
+                ? "addBoard__column-name light"
+                : "addBoard__column-name"
+            }
             value={newColumnValue.name}
             onChange={(e) =>
               setNewColumnValue({ name: e.target.value, tasks: [] })
@@ -107,7 +128,9 @@ const AddBoard = () => {
       )}
       <div
         onClick={() => setNewColumnToggle(!newColumnToggle)}
-        className="btn add-new-column"
+        className={
+          theme === "light" ? "btn add-new-column light" : "btn add-new-column"
+        }
       >
         + Add New Column
       </div>
