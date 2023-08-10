@@ -2,6 +2,7 @@ import { useRef, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BoardsContext } from "../../../contexts/BoardsContext";
 import { ModalContext } from "../../../contexts/ModalContext";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 import { updateBoard } from "../../../features/boards/boardsSlice";
 import { AiOutlinePlus } from "react-icons/ai";
 import "./addTask.css";
@@ -10,6 +11,7 @@ import "../AddBoard/addBoard.css";
 
 const AddTask = () => {
   const { modal, setModal } = useContext(ModalContext);
+  const { theme } = useContext(ThemeContext);
   const { activeBoard, setActiveBoard } = useContext(BoardsContext);
 
   const [taskTitle, setTaskTitle] = useState("");
@@ -100,7 +102,12 @@ const AddTask = () => {
   }, [statusDropdown, setStatusDropdown]);
 
   return (
-    <div className="modal-container" ref={modal_ref}>
+    <div
+      className={
+        theme === "light" ? "modal-container light" : "modal-container"
+      }
+      ref={modal_ref}
+    >
       <div className="addBoard__title">Add New Task</div>
       <div className="addBoard__name-container">
         <div className="addBoard__name">Title</div>

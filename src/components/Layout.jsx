@@ -3,6 +3,7 @@ import Navigation from "./navigation/Navigation";
 import Header from "./header/Header";
 import TodoSection from "./todoSection/TodoSection";
 import { ModalContext } from "../contexts/ModalContext";
+import { ThemeContext } from "../contexts/ThemeContext";
 import "./layout.css";
 import AddBoard from "./modals/AddBoard/AddBoard";
 import DeleteBoard from "./modals/DeleteBoard/DeleteBoard";
@@ -14,6 +15,7 @@ import AddTask from "./modals/AddTask/AddTask";
 
 const Layout = () => {
   const { modal } = useContext(ModalContext);
+  const { theme } = useContext(ThemeContext);
   const [showNav, setShowNav] = useState(true);
 
   return (
@@ -29,7 +31,13 @@ const Layout = () => {
       <div className={showNav ? "layout" : "layout hidden-nav"}>
         <div
           onClick={() => setShowNav(true)}
-          className={showNav ? "nav__show-sidebar" : "nav__show-sidebar active"}
+          className={
+            showNav && theme === "light"
+              ? "nav__show-sidebar light"
+              : showNav && theme === "dark"
+              ? "nav__show-sidebar"
+              : "nav__show-sidebar active"
+          }
         >
           <img src="./assets/icon-show-sidebar.svg" alt="show sidebar icon" />
         </div>

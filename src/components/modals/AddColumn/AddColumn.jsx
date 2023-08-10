@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import { ModalContext } from "../../../contexts/ModalContext";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 import { BoardsContext } from "../../../contexts/BoardsContext";
 import { useDispatch } from "react-redux";
 import { addColumn } from "../../../features/boards/boardsSlice";
@@ -8,6 +9,7 @@ import "./addColumn.css";
 const AddColumn = () => {
   const { activeBoard, setActiveBoard } = useContext(BoardsContext);
   const { modal, setModal } = useContext(ModalContext);
+  const { theme } = useContext(ThemeContext);
 
   const [newColumnValue, setNewColumnValue] = useState({ name: "", tasks: [] });
   const [updatedBoard, setUpdatedBoard] = useState(activeBoard);
@@ -53,7 +55,12 @@ const AddColumn = () => {
   }, [modal, setModal]);
 
   return (
-    <div className="modal-container" ref={modal_ref}>
+    <div
+      className={
+        theme === "light" ? "modal-container light" : "modal-container"
+      }
+      ref={modal_ref}
+    >
       <form className="addColumn-form">
         <input
           autoFocus

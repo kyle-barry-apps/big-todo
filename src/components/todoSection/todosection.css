@@ -10,6 +10,10 @@
   display: flex;
 }
 
+.todo-section.light {
+  background-color: #F4F7FD;
+}
+
 .todo-section__add-new-column {
   display: flex;
   justify-content: center;
@@ -26,12 +30,21 @@
   position: relative;
 }
 
+.todo-section__add-new-column.light {
+  background-color: #EBF1FB;
+}
+
 .todo-section__add-new-column-name {
   border: none;
   background-color: var(--primary-very-dark);
   padding: .5rem;
   color: white;
   border-bottom: 1px solid white;
+}
+
+.todo-section__add-new-column-name.light {
+  background-color: #EBF1FB;
+  color: black;
 }
 
 .todo-section__no_columns {
@@ -63,6 +76,10 @@
   top: -3.5rem;
   left: 0;
   min-width: 20rem;
+}
+
+.todo-section__input.light {
+  background-color: #F4F7FD;
 }
 
 .todo-section__add-new-column-btn {

@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import { BoardsContext } from "../../contexts/BoardsContext";
 import { addColumn } from "../../features/boards/boardsSlice";
 import { ModalContext } from "../../contexts/ModalContext";
-// import { ThemeContext } from "../../contexts/ThemeContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import Column from "../column/Column";
 import "./todosection.css";
 
 const TodoSection = () => {
   const { activeBoard, setActiveBoard } = useContext(BoardsContext);
   const { setModal } = useContext(ModalContext);
-  // const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [updatedBoard, setUpdatedBoard] = useState(activeBoard);
 
   const [newColumnValue, setNewColumnValue] = useState({ name: "", tasks: [] });
@@ -46,7 +46,7 @@ const TodoSection = () => {
   };
 
   return (
-    <main className="todo-section">
+    <main className={theme === "light" ? "todo-section light" : "todo-section"}>
       {activeBoard &&
         activeBoard.columns.length > 0 &&
         activeBoard.columns.map((column, index) => {
@@ -66,16 +66,30 @@ const TodoSection = () => {
       {activeBoard && activeBoard.columns.length > 0 && !newColumnToggle && (
         <div
           onClick={() => setNewColumnToggle(!newColumnToggle)}
-          className="todo-section__add-new-column"
+          className={
+            theme === "light"
+              ? "todo-section__add-new-column light"
+              : "todo-section__add-new-column"
+          }
         >
           <div>+ New Column</div>
         </div>
       )}
       {activeBoard && newColumnToggle && (
-        <div className="todo-section__add-new-column">
+        <div
+          className={
+            theme === "light"
+              ? "todo-section__add-new-column light"
+              : "todo-section__add-new-column"
+          }
+        >
           <form
             onSubmit={handleSubmitNewColumn}
-            className="todo-section__input"
+            className={
+              theme === "light"
+                ? "todo-section__input light"
+                : "todo-section__input"
+            }
           >
             <input
               autoFocus
@@ -83,7 +97,11 @@ const TodoSection = () => {
               onChange={(e) =>
                 setNewColumnValue({ name: e.target.value, tasks: [] })
               }
-              className="todo-section__add-new-column-name"
+              className={
+                theme === "light"
+                  ? "todo-section__add-new-column-name light"
+                  : "todo-section__add-new-column-name"
+              }
               type="text"
             />
             <div>

@@ -16,3 +16,8 @@
   border-radius: 5px;
   max-width: 30rem;
 }
+
+.modal-container.light {
+  background-color: #FFFFFF;
+  color: black;
+}

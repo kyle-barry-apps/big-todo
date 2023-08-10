@@ -1,12 +1,15 @@
 import { useContext, useState, useEffect } from "react";
 import { ModalContext } from "../../contexts/ModalContext";
 import { BoardsContext } from "../../contexts/BoardsContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import { useRef } from "react";
 import "./header.css";
 
 const Header = () => {
   const { activeBoard } = useContext(BoardsContext);
   const { setModal } = useContext(ModalContext);
+  const { theme } = useContext(ThemeContext);
+
   const [showBoardOptions, setShowBoardOptions] = useState(false);
 
   const boardOptionsRef = useRef();
@@ -36,9 +39,16 @@ const Header = () => {
   }, [showBoardOptions, setShowBoardOptions]);
 
   return (
-    <header className="header">
+    <header className={theme === "light" ? "header light" : "header"}>
       <div className="header__logo">
-        <img src="./assets/logo-light.svg" alt="Kanban logo" />
+        <img
+          src={
+            theme === "light"
+              ? "./assets/logo-dark.svg"
+              : "./assets/logo-light.svg"
+          }
+          alt="Kanban logo"
+        />
       </div>
       <div className="header__info">
         <h1>{activeBoard ? activeBoard.name : null}</h1>
@@ -60,8 +70,10 @@ const Header = () => {
       <div
         ref={boardOptionsRef}
         className={
-          showBoardOptions
+          showBoardOptions && theme !== "light"
             ? "header__board-options active"
+            : showBoardOptions && theme === "light"
+            ? "header__board-options light active"
             : "header__board-options"
         }
       >

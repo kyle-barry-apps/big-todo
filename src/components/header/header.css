@@ -4,6 +4,10 @@
   display: flex;
 }
 
+.header.light {
+  background-color: #FFFFFF;
+}
+
 .header__logo {
   width: 300px;
   display: flex;
@@ -24,6 +28,10 @@
 .header h1 {
   color: white;
   font-size: 1.5rem;
+}
+
+.header.light h1 {
+  color: black;
 }
 
 .button-ellipsis-group {
@@ -57,6 +65,10 @@
   gap: .5rem;
   width: 15rem;
   z-index: 1000;
+}
+
+.header__board-options.light {
+  background-color: #FFFFFF;
 }
 
 .header__board-options.active {

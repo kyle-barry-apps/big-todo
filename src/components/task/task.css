@@ -11,9 +11,18 @@
   cursor: pointer;
 }
 
+.task.light {
+  background-color: #FFFFFF;
+}
+
 .task__title {
   color: white;
   font-size: .9rem;
+  font-weight: 600;
+}
+
+.task__title.light {
+  color: black;
 }
 
 .task__subtasks {

@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { ModalContext } from "../../../contexts/ModalContext";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 import { BoardsContext } from "../../../contexts/BoardsContext";
 import {
   changeColumn,
@@ -11,6 +12,7 @@ import "./viewTask.css";
 
 const ViewTask = () => {
   const { modal, setModal } = useContext(ModalContext);
+  const { theme } = useContext(ThemeContext);
   const { activeBoard, setActiveBoard } = useContext(BoardsContext);
   const { activeTask, setActiveTask } = useContext(TaskContext);
   const [columnDropdownToggle, setColumnDropdownToggle] = useState(false);
@@ -200,7 +202,12 @@ const ViewTask = () => {
   }, [columnDropdownToggle, setColumnDropdownToggle]);
 
   return (
-    <div ref={modal_ref} className="modal-container">
+    <div
+      ref={modal_ref}
+      className={
+        theme === "light" ? "modal-container light" : "modal-container"
+      }
+    >
       <div className="viewTask__title-container">
         <h2>{activeTask.title}</h2>
         <div

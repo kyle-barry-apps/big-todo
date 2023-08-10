@@ -7,6 +7,10 @@
   border-right: 1px solid rgba(228, 235, 250, 0.3); 
 }
 
+.nav.light { 
+  background-color: #FFFFFF;
+}
+
 .nav.hidden {
   display: none;
 }
@@ -42,10 +46,15 @@
   color: var(--primary-purple);
 }
 
+.nav__board-name.light:hover, .nav__hide-sidebar.light:hover {
+  background-color: #EFEFF9;
+}
+
 .nav__board-name.active {
   background-color: var(--primary-purple);
   color: white;
 }
+
 
 .nav__board-icon.active {
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(27deg) brightness(107%) contrast(101%);
@@ -54,7 +63,6 @@
 .nav__create-new-board {
   color: var(--primary-purple);
 }
-
 
 .toggler {
   display: flex;
@@ -129,6 +137,10 @@ input:checked + .slider:before {
   border-radius: 5px;
 }
 
+.nav__mode-toggle.light {
+  background-color: #EFEFF9;
+}
+
 .nav__show-sidebar {
   display: none;
   position: absolute;
@@ -150,6 +162,4 @@ input:checked + .slider:before {
   height: .8rem;
 }
 
-.nav__show-sidebar:hover {
-  background-color: var(--primary-purple-hover);
-}
+

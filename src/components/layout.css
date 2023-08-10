@@ -22,5 +22,12 @@
   width: 100vw;
   background-color: rgba(0,0,0,.35);
   position: absolute;
+}
 
+.nav__show-sidebar:hover {
+  background-color: var(--primary-purple-hover);
+}
+
+.nav__show-sidebar.light:hover {
+  background-color: #EFEFF9;
 }

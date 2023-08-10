@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { addBoard } from "../../../features/boards/boardsSlice";
 import { useContext } from "react";
 import { ModalContext } from "../../../contexts/ModalContext";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 import { AiOutlinePlus } from "react-icons/ai";
 import "./addBoard.css";
 import "../modals.css";
@@ -17,6 +18,7 @@ const AddBoard = () => {
   const [newColumnToggle, setNewColumnToggle] = useState(false);
   const [newColumnValue, setNewColumnValue] = useState({ name: "", tasks: [] });
   const { modal, setModal } = useContext(ModalContext);
+  const { theme } = useContext(ThemeContext);
 
   const dispatch = useDispatch();
   let modal_ref = useRef();
@@ -28,7 +30,7 @@ const AddBoard = () => {
   };
 
   const createBoard = () => {
-    if (boardName && columns.length > 0) {
+    if (boardName) {
       dispatch(addBoard({ name: boardName, columns: columns }));
       setModal(null);
     }
@@ -54,7 +56,12 @@ const AddBoard = () => {
   }, [modal, setModal]);
 
   return (
-    <div className="modal-container" ref={modal_ref}>
+    <div
+      className={
+        theme === "light" ? "modal-container light" : "modal-container"
+      }
+      ref={modal_ref}
+    >
       <div className="addBoard__title">Add New Board</div>
       <div className="addBoard__name-container">
         <div className="addBoard__name">Board Name</div>
