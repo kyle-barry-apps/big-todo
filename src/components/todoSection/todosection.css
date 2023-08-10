@@ -1,8 +1,7 @@
 .todo-section {
   grid-area: main;
   background-color: var(--primary-very-dark);
-  border-bottom: none;
-  border-right: none;
+  border-top: 1px solid rgba(228, 235, 250, 0.3);
   display: flex;
   gap: 2rem;
   padding: 2rem;

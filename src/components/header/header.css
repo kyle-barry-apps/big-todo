@@ -9,11 +9,10 @@
   display: flex;
   align-items: center;
   padding-left: 2rem;
+  border-right: 1px solid rgba(228, 235, 250, 0.3);
 }
 
 .header__info {
-  /* border-left: 1px solid var(--primary-border);
-  border-bottom: 1px solid var(--primary-border); */
   flex: 1;
   height: 97px;
   display: flex;

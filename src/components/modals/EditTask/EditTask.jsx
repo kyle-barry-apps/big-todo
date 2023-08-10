@@ -4,7 +4,6 @@ import { BoardsContext } from "../../../contexts/BoardsContext";
 import { ModalContext } from "../../../contexts/ModalContext";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { updateBoard } from "../../../features/boards/boardsSlice";
-
 import { AiOutlinePlus } from "react-icons/ai";
 import "../AddTask/addTask.css";
 import "../ViewTask/viewTask.css";
@@ -34,8 +33,8 @@ const EditTask = () => {
   const modal_ref = useRef();
   const statusDropdownRef = useRef();
 
-  const createNewTask = () => {
-    const newTask = {
+  const editTask = () => {
+    const updatedTask = {
       title: taskTitle,
       description: description,
       subtasks: subtasks,
@@ -43,8 +42,8 @@ const EditTask = () => {
     };
 
     const updatedColumns = activeBoard.columns.map((column) => {
-      if (column.name === newTask.status) {
-        const updatedTasks = [...column.tasks, newTask];
+      if (column.name === updatedTask.status) {
+        const updatedTasks = [...column.tasks, updatedTask];
         return { ...column, tasks: updatedTasks };
       }
       return column;
@@ -195,7 +194,7 @@ const EditTask = () => {
           )}
         </div>
       </div>
-      <div onClick={createNewTask} className="btn add-new-board">
+      <div onClick={editTask} className="btn add-new-board">
         Create Task
       </div>
     </div>
