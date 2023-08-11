@@ -74,6 +74,7 @@
   font-weight: 600;
 }
 
+
 .addBoard__column-container {
   display: flex;
   flex-direction: column;
@@ -97,6 +98,7 @@
 
 .add-new-column.light {
   background-color: #EFEFF9;
+  border: none;
 }
 
 .add-new-board {

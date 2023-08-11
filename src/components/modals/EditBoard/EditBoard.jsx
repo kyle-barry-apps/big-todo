@@ -76,7 +76,9 @@ const EditBoard = () => {
           onChange={(e) =>
             setUpdatedBoard({ ...updatedBoard, name: e.target.value })
           }
-          className="addBoard__input"
+          className={
+            theme === "light" ? "addBoard__input light" : "addBoard__input"
+          }
           type="text"
           placeholder="e.g. Web Design"
         />
@@ -87,7 +89,15 @@ const EditBoard = () => {
         {updatedBoard.columns.map((column, index) => {
           return (
             <div key={index} className="addBoard__column">
-              <div className="addBoard__column-name">{column.name}</div>
+              <div
+                className={
+                  theme === "light"
+                    ? "addBoard__column-name light"
+                    : "addBoard__column-name"
+                }
+              >
+                {column.name}
+              </div>
               <div
                 onClick={() => removeColumn(index)}
                 className="addBoard__column-delete"
@@ -101,7 +111,11 @@ const EditBoard = () => {
       {newColumnToggle && (
         <div className="addBoard__column">
           <input
-            className="addBoard__column-name"
+            className={
+              theme === "light"
+                ? "addBoard__column-name light"
+                : "addBoard__column-name"
+            }
             value={newColumnValue.name}
             onChange={(e) =>
               setNewColumnValue({ name: e.target.value, tasks: [] })
