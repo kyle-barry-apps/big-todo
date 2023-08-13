@@ -54,8 +54,13 @@ const Header = () => {
         <h1>{activeBoard ? activeBoard.name : null}</h1>
         <div className="button-ellipsis-group">
           <button
-            className="btn add-task-btn"
+            className={
+              activeBoard && activeBoard.columns.length > 0
+                ? "btn add-task-btn"
+                : "btn add-task-btn disabled"
+            }
             onClick={() => setModal("addTask")}
+            disabled={activeBoard && activeBoard.columns.length === 0 && true}
           >
             + Add New Task
           </button>

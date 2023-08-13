@@ -190,10 +190,10 @@ const EditTask = () => {
                 : "addBoard__column-name"
             }
             type="text"
-            placeholder=""
+            placeholder="e.g. Get busy!"
           />
           <div onClick={handleAddSubtask} className="addBoard__column-add">
-            <AiOutlinePlus className="addBoard__column_icon" size={22} />
+            <AiOutlinePlus className="addBoard__column_icon" size={24} />
           </div>
         </div>
       )}

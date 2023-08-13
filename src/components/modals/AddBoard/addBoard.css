@@ -32,7 +32,7 @@
 .addBoard__column {
   display: flex;
   align-items: center;
-  gap: 1rem; 
+  gap: .5rem; 
 }
 
 .boardName__error-message {
@@ -85,6 +85,10 @@
   padding: .5rem;
   cursor: pointer;
   transition: .15s;
+}
+
+.addBoard__column-add {
+  padding: .22rem;
 }
 
 .addBoard__column-delete:hover, .addBoard__icon:hover {

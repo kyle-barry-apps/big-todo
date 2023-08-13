@@ -43,6 +43,14 @@
   background-color: var(--primary-purple);
 }
 
+.add-task-btn.disabled {
+  background-color: #39395B; 
+}
+
+.add-task-btn.disabled:hover {
+  background-color: #39395B;
+}
+
 .add-task-btn:hover {
   background-color: var(--primary-purple-hover);
 }

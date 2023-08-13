@@ -68,7 +68,7 @@ const EditBoard = () => {
       }
       ref={modal_ref}
     >
-      <div className="addBoard__title">Add New Board</div>
+      <div className="addBoard__title">Edit Board</div>
       <div className="addBoard__name-container">
         <div className="addBoard__name">Board Name</div>
         <input
