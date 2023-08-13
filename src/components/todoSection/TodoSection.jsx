@@ -54,7 +54,7 @@ const TodoSection = () => {
         })}
       {activeBoard && activeBoard.columns.length === 0 && (
         <div className="todo-section__no_columns">
-          <p>The board is empty. Create a new column to get started</p>
+          <p>The board is empty. Create a new column to get started.</p>
           <div
             onClick={() => setModal("addColumn")}
             className="todo-section__add-column-btn btn"

@@ -34,7 +34,7 @@ const AddTask = () => {
 
   const createNewTask = () => {
     const newTask = {
-      title: taskTitle,
+      title: taskTitle ? taskTitle : "I need a title!",
       description: description,
       subtasks: subtasks,
       status: status,

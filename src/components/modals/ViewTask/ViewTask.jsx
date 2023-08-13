@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { TaskContext } from "../../../contexts/TaskContext";
 import { ModalContext } from "../../../contexts/ModalContext";
@@ -141,14 +141,11 @@ const ViewTask = () => {
       return col;
     });
 
-    // Create a new board object with the updated columns array
     const updatedBoard = { ...activeBoard, columns: updatedColumns };
 
-    // Update the state with the new updatedBoard
     setActiveTask(updatedTask);
     setActiveBoard(updatedBoard);
 
-    // Dispatch the updated board to the Redux store if you need to keep the state across the application
     dispatch(changeColumn(updatedBoard));
     setColumnDropdownToggle(false);
     setEditTaskToggle(false);
@@ -289,17 +286,19 @@ const ViewTask = () => {
       )}
       <div className="viewTask__column">
         <h2>Current Status</h2>
-        <div
-          onClick={() => setColumnDropdownToggle(!columnDropdownToggle)}
-          className={
-            columnDropdownToggle
-              ? "viewTask__columnName active"
-              : "viewTask__columnName"
-          }
-        >
-          <span>{activeTask.status}</span>
-          <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
-          {columnDropdownToggle && (
+        <div className="viewTask__columnDropdownContainer">
+          <div
+            onClick={() => setColumnDropdownToggle(!columnDropdownToggle)}
+            className={
+              columnDropdownToggle
+                ? "viewTask__columnName active"
+                : "viewTask__columnName"
+            }
+          >
+            <span>{activeTask.status}</span>
+            <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
+          </div>
+          {columnDropdownToggle && activeBoard.columns.length > 1 && (
             <div
               className={
                 theme === "light"

@@ -1,4 +1,4 @@
-import { useRef, useContext, useEffect, useState } from "react";
+import React, { useRef, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { BoardsContext } from "../../../contexts/BoardsContext";
 import { ModalContext } from "../../../contexts/ModalContext";
@@ -19,9 +19,7 @@ const EditTask = () => {
 
   const [taskTitle, setTaskTitle] = useState(activeTask.title);
   const [description, setDescription] = useState(activeTask.description);
-  const [status, setStatus] = useState(
-    activeBoard.columns.length > 0 ? activeBoard.columns[0].name : ""
-  );
+  const [status, setStatus] = useState(activeTask ? activeTask.status : "");
   const [statusDropdown, setStatusDropdown] = useState(false);
   const [newSubtaskToggle, setNewSubtaskToggle] = useState(false);
   const [newSubtask, setNewSubtask] = useState({
@@ -44,17 +42,33 @@ const EditTask = () => {
     };
 
     const updatedColumns = activeBoard.columns.map((column) => {
-      if (column.name === updatedTask.status) {
+      if (activeTask.status === updatedTask.status) {
+        // User didn't change the status, so simply update the task details
+        const updatedTasks = column.tasks.map((task) =>
+          task.title === activeTask.title ? updatedTask : task
+        );
+        return { ...column, tasks: updatedTasks };
+      } else if (column.name === activeTask.status) {
+        // Remove the task from the old status column
+        const updatedTasks = column.tasks.filter(
+          (task) => task.title !== activeTask.title
+        );
+        return { ...column, tasks: updatedTasks };
+      } else if (column.name === updatedTask.status) {
+        // Add the task to the new status column
         const updatedTasks = [...column.tasks, updatedTask];
         return { ...column, tasks: updatedTasks };
+      } else {
+        return column;
       }
-      return column;
     });
 
     const updatedBoard = {
       ...activeBoard,
       columns: updatedColumns,
     };
+
+    console.log(updatedBoard);
 
     setActiveBoard(updatedBoard);
     dispatch(updateBoard({ updatedBoard, activeBoard }));
@@ -89,9 +103,9 @@ const EditTask = () => {
   }, [modal, setModal]);
 
   useEffect(() => {
-    if (statusDropdown.current) {
+    if (statusDropdownRef.current) {
       const handler = (e) => {
-        if (!statusDropdown.current.contains(e.target)) {
+        if (!statusDropdownRef.current.contains(e.target)) {
           setStatusDropdown(false);
         }
       };
@@ -170,7 +184,11 @@ const EditTask = () => {
             onChange={(e) =>
               setNewSubtask({ title: e.target.value, isCompleted: false })
             }
-            className="addBoard__column-name"
+            className={
+              theme === "light"
+                ? "addBoard__column-name light"
+                : "addBoard__column-name"
+            }
             type="text"
             placeholder=""
           />
@@ -189,16 +207,18 @@ const EditTask = () => {
       </div>
       <div className="viewTask__column">
         <span>Status</span>
-        <div
-          onClick={() => setStatusDropdown(!statusDropdown)}
-          className={
-            statusDropdown
-              ? "viewTask__columnName active"
-              : "viewTask__columnName"
-          }
-        >
-          <span>{status}</span>
-          <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
+        <div className="viewTask__columnDropdownContainer">
+          <div
+            onClick={() => setStatusDropdown(!statusDropdown)}
+            className={
+              statusDropdown
+                ? "viewTask__columnName active"
+                : "viewTask__columnName"
+            }
+          >
+            <span>{status}</span>
+            <img src="/assets/icon-chevron-down.svg" alt="chevron down icon" />
+          </div>
           {statusDropdown && (
             <div
               className={
