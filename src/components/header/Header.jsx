@@ -18,7 +18,6 @@ const Header = () => {
   const [showBoardOptions, setShowBoardOptions] = useState(false);
   const [showNavDropdown, setShowNavDropdown] = useState(false);
 
-  console.log(showNavDropdown);
   const boardOptionsRef = useRef();
   const navDropdownRef = useRef();
 

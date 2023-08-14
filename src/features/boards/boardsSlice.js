@@ -43,8 +43,6 @@ export const boardsSlice = createSlice({
     },
     addColumn: (state, action) => {
       const { updatedBoard, activeBoard } = action.payload
-      console.log('here')
-      console.log(updatedBoard)
 
       const updatedBoardsArray = state.boardsArray.map((board) => 
         board.name === activeBoard.name ? updatedBoard : board

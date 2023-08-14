@@ -68,8 +68,6 @@ const EditTask = () => {
       columns: updatedColumns,
     };
 
-    console.log(updatedBoard);
-
     setActiveBoard(updatedBoard);
     dispatch(updateBoard({ updatedBoard, activeBoard }));
     setStatusDropdown(false);
