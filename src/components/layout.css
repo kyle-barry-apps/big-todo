@@ -31,3 +31,17 @@
 .nav__show-sidebar.light:hover {
   background-color: #EFEFF9;
 }
+
+@media (max-width: 750px) {
+  .layout {
+    grid-template-areas:  "header header"
+                          "main main"
+                          "main main";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 97px 1fr 1fr;  
+  }
+
+  .nav__show-sidebar.active {
+    display: none;
+  }
+}

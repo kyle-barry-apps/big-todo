@@ -98,3 +98,75 @@
 .header__delete {
   color: var(--warning-text);
 }
+
+.addNewTaskIcon {
+  display: none;
+}
+
+.logo-mobile {
+  display: none;
+}
+
+.mobile-container {
+  display: none;
+  gap: 1rem;
+  align-items: center;
+}
+
+.chevron-up, .chevron-down {
+  display: none;
+}
+
+.navDropdown {
+  display: none;
+  position: absolute;
+  background-color: #2B2C37;
+  top: 8rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 750px) {
+  .addNewTask {
+    display: none;
+  }
+
+  .addNewTaskIcon {
+    display: block;
+  }
+
+  .logo-mobile {
+    display: block;
+  }
+
+  .header__logo {
+    display: none;
+  }
+
+  .chevron-down.active, .chevron-up.active {
+    display: block;
+  }
+
+  .header__info {
+    cursor: pointer;
+  }
+
+  .navDropdown.active {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .navDropdown.active.light {
+    background-color: white;
+  }
+
+  .mobile-container {
+    display: flex;
+  }
+
+  .desktop-container {
+    display: none;
+  }
+  
+
+}

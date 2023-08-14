@@ -162,4 +162,8 @@ input:checked + .slider:before {
   height: .8rem;
 }
 
-
+@media (max-width: 750px) {
+  .nav {
+    display: none;
+  }
+}
